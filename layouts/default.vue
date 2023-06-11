@@ -13,27 +13,19 @@
         <v-divider />
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
+            <v-icon :color="item.color">{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title :class="item.color + '--text'">{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider />
+        <v-list-item v-for="(item, i) in itemsSocial" :key="i" :to="item.to" router exact>
+          <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider />
-        <v-list-item to="/3" router exact>
-          <v-list-item-action>
-            <v-icon>mdi-twitch</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Twitch</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item to="/2" router exact>
-          <v-list-item-action>
-            <v-icon>mdi-facebook</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Facebook</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -62,7 +54,10 @@
     </v-app-bar>
     <v-main :clipped-left="clipped" :fixed="fixed">
       <v-container fluid>
-        <Nuxt />
+        <Nuxt :transition="{
+        name: 'bounce',
+        mode: 'out-in'
+      }" />
       </v-container>
     </v-main>
   </v-app>
@@ -91,14 +86,37 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-account-group-outline',
-          title: 'Community',
-          to: '/inspire'
+          icon: 'mdi-newspaper-variant-outline',
+          title: 'Notícias',
+          to: '/news'
         },
         {
-          icon: 'mdi-cart-outline',
-          title: 'Marketplace',
-          to: '/help'
+          icon: 'mdi-web',
+          title: 'Community',
+          to: '/community'
+        },
+        {
+          title: 'Prêmios',
+          icon: 'mdi-medal',
+          to: '/awards'
+        },
+        {
+          title: 'Assinaturas',
+          icon: 'mdi-crown',
+          to: '/team',
+          color: 'amber'
+        }
+      ],
+      itemsSocial: [
+        {
+          icon: 'mdi-twitch',
+          title: 'Twitch',
+          to: '/twitch'
+        },
+        {
+          icon: 'mdi-facebook',
+          title: 'Facebook',
+          to: '/facebook'
         }
       ],
       actions: {
@@ -151,5 +169,15 @@ export default {
 <style>
 .v-navigation-drawer .v-divider {
   margin: 8px 0;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
 }
 </style>

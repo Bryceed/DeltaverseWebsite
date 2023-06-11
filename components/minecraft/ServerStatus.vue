@@ -113,7 +113,7 @@ function renderServerStatus (serverStatusData) {
   const mcEmbedHTML = `
     <div class="mc-embed">
       <div class="mc-embed__title">
-        Ping: ${ping}ms <div id="signalWave" data-value="${ping}" data-size="small">
+        Server Ping: ${ping}ms <div id="signalWave" data-value="${ping}" data-size="small">
           <div class="signal-wave__bar"></div>
           <div class="signal-wave__bar"></div>
           <div class="signal-wave__bar"></div>
